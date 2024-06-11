@@ -6,18 +6,22 @@ import com.example.FitnessAppProject.models.entity.Exercise;
 import com.example.FitnessAppProject.models.entity.MuscleGroup;
 import com.example.FitnessAppProject.models.enums.MuscleGroupEnum;
 import com.example.FitnessAppProject.repo.ExerciseRepository;
+import com.example.FitnessAppProject.repo.MuscleGroupRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ExerciseServiceImpl implements ExerciseService {
 
     private final ExerciseRepository exerciseRepository;
+    private final MuscleGroupRepository muscleGroupRepository;
 
-    public ExerciseServiceImpl(ExerciseRepository exerciseRepository) {
+    public ExerciseServiceImpl(ExerciseRepository exerciseRepository, MuscleGroupRepository muscleGroupRepository) {
         this.exerciseRepository = exerciseRepository;
+        this.muscleGroupRepository = muscleGroupRepository;
     }
 
     @Override
@@ -30,8 +34,8 @@ public class ExerciseServiceImpl implements ExerciseService {
         exercise.setMediaUrl(exerciseDTO.getMediaUrl());
         List<MuscleGroup> muscleGroupEntities = exerciseDTO.getMuscleGroups().stream()
                 .map(muscleGroupName -> {
-                    MuscleGroup muscleGroup = new MuscleGroup();
-                    muscleGroup.setMuscleGroup(MuscleGroupEnum.valueOf(muscleGroupName));
+                    MuscleGroup muscleGroup = muscleGroupRepository.findByMuscleGroup(MuscleGroupEnum.valueOf(muscleGroupName))
+                            .orElseThrow(() -> new IllegalArgumentException("Muscle group not found: " + muscleGroupName));
                     return muscleGroup;
                 })
                 .collect(Collectors.toList());
@@ -44,7 +48,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     @Override
     public ExerciseHomeDTO getExerciseData(){
         List<ExerciseDTO> allExercises = exerciseRepository.getAllAvailable().stream()
-                .map(ExerciseDTO::createFromExercise)
+                .map(ExerciseDTO::fromExercise)
                 .collect(Collectors.toList());
 
         return new ExerciseHomeDTO(allExercises);

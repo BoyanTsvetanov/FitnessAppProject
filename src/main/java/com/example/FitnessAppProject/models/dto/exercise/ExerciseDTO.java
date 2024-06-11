@@ -65,11 +65,21 @@ public class ExerciseDTO {
         exerciseDTO.setDescription(exercise.getDescription());
         exerciseDTO.setRepetitions(exercise.getRepetitions());
         exerciseDTO.setMediaUrl(exercise.getMediaUrl());
-        exerciseDTO.setMuscleGroups(exercise.getMuscleGroup()
+        exerciseDTO.setMuscleGroups(exercise.getMuscleGroup()  // Ensure to get the list of muscle groups correctly
                 .stream()
-                .map(MuscleGroup::getMuscleGroup)
-                .map(Enum::name)
+                .map(MuscleGroup::getMuscleGroup) // Map the MuscleGroup entity to its enum
+                .map(Enum::name) // Convert the enum to its string representation
                 .collect(Collectors.toList()));
+
+        return exerciseDTO;
+    }
+    public static ExerciseDTO fromExercise(Exercise exercise){
+        ExerciseDTO exerciseDTO = new ExerciseDTO();
+
+        exerciseDTO.setId(exercise.getId());
+        exerciseDTO.setDescription(exercise.getDescription());
+        exerciseDTO.setRepetitions(exercise.getRepetitions());
+        exerciseDTO.setMediaUrl(exercise.getMediaUrl());
 
         return exerciseDTO;
     }

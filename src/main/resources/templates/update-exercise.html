@@ -18,9 +18,9 @@
   <br>
   <label>Muscle Groups:</label>
   <br>
-  <th:block th:each="muscleGroupEnum : ${T(com.example.FitnessAppProject.models.entity.MuscleGroupEnum).values()}">
-    <input type="checkbox" th:id="${muscleGroupEnum.name()}" th:name="muscleGroups" th:value="${muscleGroupEnum.name()}" th:checked="${exercise.muscleGroups.contains(T(com.example.FitnessAppProject.models.entity.MuscleGroupEnum).valueOf(muscleGroupEnum.name()))}">
-    <label th:for="${muscleGroupEnum.name()}" th:text="${muscleGroupEnum.name()}">Muscle Group</label>
+  <th:block th:each="muscleGroupEnum : ${muscleGroups}">
+    <input type="checkbox" th:id="${muscleGroupEnum}" th:name="muscleGroups" th:value="${muscleGroupEnum}">
+    <label th:for="${muscleGroupEnum}" th:text="${muscleGroupEnum}">Muscle Group</label>
     <br>
   </th:block>
   <button type="submit">Update Exercise</button>
