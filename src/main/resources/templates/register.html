@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Movie Time</title>
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- APP CSS -->
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <!--        <link rel="stylesheet" href="/css/style.css"/>-->
+    <link rel="stylesheet" href="/css/grid.css"/>
+    <link rel="stylesheet" href="/css/app.css"/>
+    <style>
+        footer {
+          position: relative;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="~{fragments/commons::header}"></header>
+<main>
+    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Register</span></h1>
+
+    <form class="mx-auto w-25 bg-blur rounded"
+          th:method="post"
+          th:action="@{/register}"
+          th:object="${userRegistrationDTO}">
+
+        <div class="form-group ">
+            <label for="username" class="text-white font-weight-bold">Username</label>
+            <input id="username"
+                   name="username"
+                   th:field="*{username}"
+                   type="text"
+                   class="form-control"
+                   placeholder="Username"/>
+<!--            <p class="errors alert alert-danger">-->
+<!--                Username is required.-->
+<!--            </p>-->
+            <small th:if="${#fields.hasErrors('username')}"
+                   th:errors="*{username}" class="text-danger">Username error message</small>
+        </div>
+
+
+        <div class="form-group ">
+            <label for="email" class="text-white font-weight-bold">Email</label>
+            <input id="email"
+                   name="email"
+                   type="email"
+                   class="form-control"
+                   th:field="*{email}"
+                   placeholder="Email"/>
+            <p th:if="${#fields.hasErrors('email')}" class="errors alert alert-danger"
+               th:errors="*{email}"></p>
+        </div>
+
+
+        <div class="form-group ">
+            <label for="password" class="text-white font-weight-bold">Password</label>
+            <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    class="form-control"
+                    th:field="*{password}"
+                    placeholder="Password"/>
+            <p th:if="${#fields.hasErrors('password')}" class="errors alert alert-danger"
+               th:errors="*{password}"></p>
+        </div>
+
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="gender" class="h4 mb-2">Gender</label>
+            </div>
+            <select name="gender" class="browser-default custom-select" th:field="*{gender}" id="gender">
+                <option value="">Gender</option>
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+            </select>
+            <p th:if="${#fields.hasErrors('gender')}" class="errors alert alert-danger"
+               th:errors="*{gender}"></p>
+        </div>
+
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="age" class="h4 mb-2">Release Year</label>
+            </div>
+            <input type="text" inputmode="numeric" class="form-control" id="age"
+                   th:field="*{age}"
+                   th:errorclass="bg-danger">
+            <small th:if="${#fields.hasErrors('age')}"
+                   th:errors="*{age}" class="text-danger">Age error message</small>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="height" class="h4 mb-2">height</label>
+            </div>
+            <input type="text" class="form-control" id="height"
+                   th:field="*{height}"
+                   th:errorclass="bg-danger">
+            <small th:if="${#fields.hasErrors('height')}"
+                   th:errors="*{height}" class="text-danger">height error message</small>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="weight" class="h4 mb-2">Poster</label>
+            </div>
+            <input type="text" class="form-control" id="weight"
+                   th:field="*{weight}"
+                   th:errorclass="bg-danger">
+            <small th:if="${#fields.hasErrors('weight')}"
+                   th:errors="*{weight}" class="text-danger">Poster error message</small>
+        </div>
+
+        <p th:if="${registration_error}" class="errors alert alert-danger">
+            Make sure if the passwords are correct. If yes, try change username or email
+        </p>
+
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn btn-warning  mb-3" value="Register">Register</button>
+        </div>
+
+    </form>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+
+<!-- SCRIPT -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+<script >
+    $(document).ready(() => {
+    $('body').on('click', '#hamburger-menu', () => {
+        $('#hamburger-menu').toggleClass('active');
+        $('#nav-menu').toggleClass('active');
+    });
+});
+</script>
+
+
+</body>
+</html>
