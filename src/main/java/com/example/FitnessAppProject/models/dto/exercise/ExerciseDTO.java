@@ -1,13 +1,14 @@
 package com.example.FitnessAppProject.models.dto.exercise;
 
 import com.example.FitnessAppProject.models.entity.Exercise;
-import com.example.FitnessAppProject.models.entity.MuscleGroup;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ExerciseDTO {
     private Long id;
+
+    private String name;
 
     private String description;
 
@@ -16,6 +17,14 @@ public class ExerciseDTO {
     private String mediaUrl;
 
     private List<String> muscleGroups;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getDescription() {
         return description;
@@ -62,25 +71,26 @@ public class ExerciseDTO {
         ExerciseDTO exerciseDTO = new ExerciseDTO();
 
         exerciseDTO.setId(exercise.getId());
+        exerciseDTO.setName(exercise.getName());
         exerciseDTO.setDescription(exercise.getDescription());
         exerciseDTO.setRepetitions(exercise.getRepetitions());
         exerciseDTO.setMediaUrl(exercise.getMediaUrl());
-        exerciseDTO.setMuscleGroups(exercise.getMuscleGroup()  // Ensure to get the list of muscle groups correctly
-                .stream()
-                .map(MuscleGroup::getMuscleGroup) // Map the MuscleGroup entity to its enum
-                .map(Enum::name) // Convert the enum to its string representation
-                .collect(Collectors.toList()));
+        exerciseDTO.setMuscleGroups(exercise.getMuscleGroups());
 
         return exerciseDTO;
     }
-    public static ExerciseDTO fromExercise(Exercise exercise){
-        ExerciseDTO exerciseDTO = new ExerciseDTO();
-
-        exerciseDTO.setId(exercise.getId());
-        exerciseDTO.setDescription(exercise.getDescription());
-        exerciseDTO.setRepetitions(exercise.getRepetitions());
-        exerciseDTO.setMediaUrl(exercise.getMediaUrl());
-
-        return exerciseDTO;
-    }
+//    public static ExerciseDTO fromExercise(Exercise exercise){
+//        ExerciseDTO exerciseDTO = new ExerciseDTO();
+//
+//        exerciseDTO.setId(exercise.getId());
+//        exerciseDTO.setDescription(exercise.getDescription());
+//        exerciseDTO.setRepetitions(exercise.getRepetitions());
+//        exerciseDTO.setMediaUrl(exercise.getMediaUrl());
+//        exerciseDTO.setMuscleGroups(
+//                exercise.getMuscleGroup().stream()
+//                        .map(muscleGroup -> muscleGroup.getMuscleGroup().toString())
+//                        .collect(Collectors.toList())
+//        );
+//        return exerciseDTO;
+//    }
 }

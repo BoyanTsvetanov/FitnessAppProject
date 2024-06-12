@@ -51,10 +51,10 @@ public class ExerciseController {
         return "redirect:/exercises";
     }
 
-    @GetMapping
-    public String listExercises(Model model) {
+    @GetMapping()
+    public String getExercises(Model model) {
         ExerciseHomeDTO exerciseHomeDTO = exerciseService.getExerciseData();
-        model.addAttribute("exercises", exerciseHomeDTO.getAllExercises());
+        model.addAttribute("exerciseHomeDTO", exerciseHomeDTO);
         return "exercises";
     }
 

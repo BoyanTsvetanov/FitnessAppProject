@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Exercise List</title>
+  <title>Exercises</title>
 </head>
 <body>
-<h1>All Exercises</h1>
-<table>
-  <thead>
-  <tr>
-    <th>Description</th>
-    <th>Repetitions</th>
-    <th>Media URL</th>
-    <th>Muscle Groups</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="exercise : ${exercises}">
-    <td th:text="${exercise.description}">Description</td>
-    <td th:text="${exercise.repetitions}">Repetitions</td>
-    <td th:text="${exercise.mediaUrl}">Media URL</td>
-    <td th:text="${exercise.muscleGroups}">Muscle Groups</td>
-    <td>
-      <a th:href="@{/exercises/{id}/edit(id=${exercise.id})}">Edit</a>
-      <form th:action="@{/exercises/{id}(id=${exercise.id})}" th:method="delete" style="display:inline;">
-        <button type="submit">Delete</button>
-      </form>
-    </td>
-  </tr>
-  </tbody>
-</table>
-<a href="exercises/create">Create New Exercise</a>
+<h1>Exercises</h1>
+<!--<div>-->
+<!--  <h2>Muscle Groups</h2>-->
+<!--  <ul>-->
+<!--    <li th:each="muscleGroup : ${exerciseHomeDTO.muscleGroups}">-->
+<!--      <span th:text="${muscleGroup}">Muscle Group</span>-->
+<!--    </li>-->
+<!--  </ul>-->
+<!--</div>-->
+<div>
+  <h2>All Exercises</h2>
+  <ul>
+    <li th:each="exercise : ${exerciseHomeDTO.allExercises}">
+      <h3 th:text="${exercise.description}">Exercise Description</h3>
+      <p>Repetitions: <span th:text="${exercise.repetitions}">Reps</span></p>
+      <p>Media URL: <a th:href="${exercise.mediaUrl}" th:text="${exercise.mediaUrl}">Media Link</a></p>
+      <p>Muscle Groups:
+        <span th:each="muscleGroup : ${exercise.muscleGroups}">
+                        <span th:text="${muscleGroup}">Muscle Group</span>
+<!--                        <span th:if="${!#lists.isLast(muscleGroup, exercise.muscleGroups)}">, </span>-->
+                    </span>
+      </p>
+    </li>
+  </ul>
+</div>
 </body>
 </html>

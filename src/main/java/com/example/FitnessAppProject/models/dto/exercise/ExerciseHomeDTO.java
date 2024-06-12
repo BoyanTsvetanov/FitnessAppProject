@@ -1,6 +1,7 @@
 package com.example.FitnessAppProject.models.dto.exercise;
 
 import java.util.List;
+import java.util.Set;
 
 public class ExerciseHomeDTO {
     private List<ExerciseDTO> allExercises;

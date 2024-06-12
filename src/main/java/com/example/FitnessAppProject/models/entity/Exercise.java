@@ -8,19 +8,24 @@ import java.util.List;
 @Table(name = "exercises")
 public class Exercise extends BaseEntity {
     @Column(nullable = false)
+    private String name;
+    @Column(nullable = false)
     private String description;
     @Column(nullable = false)
     private int repetitions;
     @Column(name = "media")
     private String mediaUrl;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "exercise_muscle_groups",
-            joinColumns = @JoinColumn(name = "exercise_id"),
-            inverseJoinColumns = @JoinColumn(name = "muscle_group_id")
-    )
-    private List<MuscleGroup> muscleGroups;
+    @Column(name = "muscle_group", nullable = false)
+    private List<String> muscleGroups;
 
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getDescription() {
         return description;
@@ -46,12 +51,11 @@ public class Exercise extends BaseEntity {
         this.mediaUrl = mediaUrl;
     }
 
-    public List<MuscleGroup> getMuscleGroup() {
+    public List<String> getMuscleGroups() {
         return muscleGroups;
     }
 
-    public void setMuscleGroup(List<MuscleGroup> muscleGroup) {
-        this.muscleGroups = muscleGroup;
+    public void setMuscleGroups(List<String> muscleGroups) {
+        this.muscleGroups = muscleGroups;
     }
-
 }
