@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>View Exercise</title>
+</head>
+<body>
+<h1>View Exercise</h1>
+<p>Name: <span th:text="${exercise.name}">Exercise Name</span></p>
+<p>Description: <span th:text="${exercise.description}">Exercise Description</span></p>
+<p>Repetitions: <span th:text="${exercise.repetitions}">Reps</span></p>
+<p>Media:</p>
+<img th:if="${exercise.mediaUrl}" th:src="${exercise.mediaUrl}" alt="Exercise Image" />
+<p>Muscle Groups:
+  <span th:each="muscleGroup : ${exercise.muscleGroups}">
+        <span th:text="${muscleGroup} + ' '">Muscle Group</span>
+    </span>
+</p>
+<!-- Link to edit the exercise -->
+<a th:href="@{/exercises/{id}/edit(id=${exercise.id})}">Edit</a>
+<!-- Form to delete the exercise -->
+<form th:action="@{/{exercise.id}/delete}" method="post">
+  <button type="submit">Delete</button>
+</form>
+</body>
+</html>

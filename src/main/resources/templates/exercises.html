@@ -17,15 +17,25 @@
   <h2>All Exercises</h2>
   <ul>
     <li th:each="exercise : ${exerciseHomeDTO.allExercises}">
-      <h3 th:text="${exercise.description}">Exercise Description</h3>
+      <h3 th:text="${exercise.name}">Exercise Description</h3>
+      <p>Description: <span th:text="${exercise.description}">Exercise Description</span></p>
       <p>Repetitions: <span th:text="${exercise.repetitions}">Reps</span></p>
-      <p>Media URL: <a th:href="${exercise.mediaUrl}" th:text="${exercise.mediaUrl}">Media Link</a></p>
+      <p>Media:</p>
+      <img th:if="${exercise.mediaUrl}" th:src="${exercise.mediaUrl}" alt="Exercise Image" />
       <p>Muscle Groups:
         <span th:each="muscleGroup : ${exercise.muscleGroups}">
-                        <span th:text="${muscleGroup}">Muscle Group</span>
+                        <span th:text="${muscleGroup} + ' '">Muscle Group</span>
 <!--                        <span th:if="${!#lists.isLast(muscleGroup, exercise.muscleGroups)}">, </span>-->
                     </span>
       </p>
+      <a th:href="@{/exercises/{id}(id=${exercise.id})}">View</a>
+      <!-- Link to edit the exercise -->
+      <a th:href="@{/exercises/{id}/edit(id=${exercise.id})}">Edit</a>
+      <!-- Form to delete the exercise -->
+      <form th:action="@{/exercises/{id}/delete(id=${exercise.id})}" method="post">
+        <button type="submit">Delete</button>
+      </form>
+
     </li>
   </ul>
 </div>

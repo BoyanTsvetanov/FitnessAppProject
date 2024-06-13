@@ -7,6 +7,9 @@
 <h1>Update Exercise</h1>
 <form th:action="@{/exercises/{id}/update(id=${exercise.id})}" th:method="post">
   <input type="hidden" th:value="${exercise.id}">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
+  <br>
   <label for="description">Description:</label>
   <input type="text" id="description" name="description" th:value="${exercise.description}" required>
   <br>
