@@ -2,9 +2,15 @@ package com.example.FitnessAppProject.models.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
+@NamedEntityGraph(
+        name = "Workout.exercises",
+        attributeNodes = @NamedAttributeNode("exercises")
+)
 @Table(name = "workouts")
 public class Workout extends BaseEntity {
     @Column(nullable = false)
@@ -13,9 +19,12 @@ public class Workout extends BaseEntity {
     private int runtime;
     @Column(nullable = false)
     private Double credits;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "workout_id")
-    private List<Exercise> exercises;
+    @ManyToMany
+    @JoinTable(
+            name = "workout_exercises",
+            joinColumns = @JoinColumn(name = "workout_id"),
+            inverseJoinColumns = @JoinColumn(name = "exercise_id"))
+    private Set<Exercise> exercises = new HashSet<>();
 
     @ManyToMany(mappedBy = "workouts")
     private List<Plan> plans;
@@ -45,11 +54,11 @@ public class Workout extends BaseEntity {
         this.credits = credits;
     }
 
-    public List<Exercise> getExercises() {
+    public Set<Exercise> getExercises() {
         return exercises;
     }
 
-    public void setExercises(List<Exercise> exercises) {
+    public void setExercises(Set<Exercise> exercises) {
         this.exercises = exercises;
     }
 

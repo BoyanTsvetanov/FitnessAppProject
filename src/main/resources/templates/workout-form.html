@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:if="${editMode} ? 'Edit Workout' : 'Create New Workout'"></title>
+</head>
+<body>
+<h1 th:if="${editMode}">Edit Workout</h1>
+<h1 th:unless="${editMode}">Create New Workout</h1>
+
+<form action="#" th:action="${editMode} ? @{/workouts/{id}/update(id=${workoutDTO.id})} : @{/workouts/create}" method="post" th:object="${workoutDTO}">
+
+  <input type="hidden" th:if="${editMode}" th:field="*{id}">
+
+  <label>Name:</label>
+  <input type="text" th:field="*{name}" name="name" required><br>
+
+  <label>Runtime:</label>
+  <input type="number" th:field="*{runtime}" name="runtime" required><br>
+
+  <label>Credits:</label>
+  <input type="number" th:field="*{credits}" name="credits" required><br>
+
+  <fieldset>
+    <legend>Available Exercises</legend>
+    <div th:each="exercise : ${availableExercises}">
+      <label>
+        <input type="checkbox" th:field="*{exerciseIds}" th:value="${exercise.id}" />
+        <span th:text="${exercise.name}"></span>
+      </label><br>
+    </div>
+  </fieldset>
+
+  <button type="submit" th:text="${editMode} ? 'Update' : 'Create'">Submit</button>
+</form>
+
+<a href="/workouts">Cancel</a>
+</body>
+</html>

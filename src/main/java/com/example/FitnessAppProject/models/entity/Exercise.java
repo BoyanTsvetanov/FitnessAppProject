@@ -2,7 +2,9 @@ package com.example.FitnessAppProject.models.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "exercises")
@@ -17,6 +19,8 @@ public class Exercise extends BaseEntity {
     private String mediaUrl;
     @Column(name = "muscle_group", nullable = false)
     private List<String> muscleGroups;
+    @ManyToMany(mappedBy = "exercises")
+    private Set<Workout> workouts = new HashSet<>();
 
 
     public String getName() {
@@ -57,5 +61,13 @@ public class Exercise extends BaseEntity {
 
     public void setMuscleGroups(List<String> muscleGroups) {
         this.muscleGroups = muscleGroups;
+    }
+
+    public Set<Workout> getWorkouts() {
+        return workouts;
+    }
+
+    public void setWorkouts(Set<Workout> workouts) {
+        this.workouts = workouts;
     }
 }

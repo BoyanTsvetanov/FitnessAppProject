@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>List of Workouts</title>
+</head>
+<body>
+<h1>List of Workouts</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Runtime</th>
+    <th>Credits</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="workout : ${workouts.allWorkouts}">
+    <td th:text="${workout.name}"></td>
+    <td th:text="${workout.runtime}"></td>
+    <td th:text="${workout.credits}"></td>
+    <td>
+      <a th:href="@{/workouts/{id}(id=${workout.id})}">View</a> |
+      <a th:href="@{/workouts/{id}/edit(id=${workout.id})}">Edit</a> |
+      <a th:href="@{/workouts/{id}/delete(id=${workout.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<a href="/workouts/new">Create New Workout</a>
+</body>
+</html>

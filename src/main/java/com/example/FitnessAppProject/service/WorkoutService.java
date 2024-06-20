@@ -1,20 +1,22 @@
 package com.example.FitnessAppProject.service;
 
+import com.example.FitnessAppProject.models.dto.workout.WorkoutDTO;
+import com.example.FitnessAppProject.models.dto.workout.WorkoutHomeDTO;
 import com.example.FitnessAppProject.models.entity.Workout;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface WorkoutService {
-    Workout createWorkout(Workout workout);
+    void createWorkout(WorkoutDTO workout);
 
     // Read
-    List<Workout> getAllWorkouts();
+    WorkoutHomeDTO getAllWorkouts();
 
     Optional<Workout> getWorkoutById(Long id);
 
     // Update
-    Workout updateWorkout(Long id, Workout workoutDetails);
+    void updateWorkout(Long id, WorkoutDTO workoutDetails);
 
     // Delete
     void deleteWorkout(Long id);

@@ -79,6 +79,21 @@ public class ExerciseDTO {
 
         return exerciseDTO;
     }
+    public static Exercise toEntity(ExerciseDTO exerciseDTO) {
+        if (exerciseDTO == null) {
+            return null;
+        }
+
+        Exercise exercise = new Exercise();
+        exercise.setId(exerciseDTO.getId());
+        exercise.setName(exerciseDTO.getName());
+        exercise.setDescription(exerciseDTO.getDescription());
+        exercise.setRepetitions(exerciseDTO.getRepetitions());
+        exercise.setMediaUrl(exerciseDTO.getMediaUrl());
+        exercise.setMuscleGroups(exerciseDTO.getMuscleGroups());
+
+        return exercise;
+    }
 //    public static ExerciseDTO fromExercise(Exercise exercise){
 //        ExerciseDTO exerciseDTO = new ExerciseDTO();
 //

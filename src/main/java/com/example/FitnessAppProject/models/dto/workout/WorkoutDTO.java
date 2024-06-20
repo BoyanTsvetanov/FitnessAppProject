@@ -1,10 +1,12 @@
 package com.example.FitnessAppProject.models.dto.workout;
 
+
 import com.example.FitnessAppProject.models.dto.exercise.ExerciseDTO;
-import com.example.FitnessAppProject.models.dto.plan.PlanDTO;
+import com.example.FitnessAppProject.models.entity.Exercise;
 import com.example.FitnessAppProject.models.entity.Workout;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WorkoutDTO {
@@ -16,9 +18,20 @@ public class WorkoutDTO {
 
     private Double credits;
 
+    private Set<Long> exerciseIds;
+
     private List<ExerciseDTO> exercises;
 
+    // getters and setters
 
+
+    public Set<Long> getExerciseIds() {
+        return exerciseIds;
+    }
+
+    public void setExerciseIds(Set<Long> exerciseIds) {
+        this.exerciseIds = exerciseIds;
+    }
 
     public Long getId() {
         return id;
@@ -60,18 +73,26 @@ public class WorkoutDTO {
         this.exercises = exercises;
     }
 
-    public static WorkoutDTO createFromWorkout(Workout workout){
+    public static WorkoutDTO createFromWorkout(Workout workout) {
         WorkoutDTO workoutDTO = new WorkoutDTO();
 
         workoutDTO.setId(workout.getId());
         workoutDTO.setName(workout.getName());
         workoutDTO.setRuntime(workout.getRuntime());
         workoutDTO.setCredits(workout.getCredits());
-        workoutDTO.setExercises(
-                workout.getExercises().stream()
-                        .map(ExerciseDTO::createFromExercise)
-                        .collect(Collectors.toList())
-        );
+
+        Set<Long> exerciseIds = workout.getExercises().stream()
+                .map(Exercise::getId)
+                .collect(Collectors.toSet());
+
+        List<ExerciseDTO> exercises = workout.getExercises().stream()
+                .map(ExerciseDTO::createFromExercise)
+                .collect(Collectors.toList());
+
+        workoutDTO.setExercises(exercises);
+
+        workoutDTO.setExerciseIds(exerciseIds);
+
 
         return workoutDTO;
     }

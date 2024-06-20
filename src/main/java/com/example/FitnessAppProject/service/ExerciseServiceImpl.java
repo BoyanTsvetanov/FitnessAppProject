@@ -46,6 +46,12 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
+    public ExerciseDTO getExerciseById(Long exerciseId) {
+        // Assuming ExerciseRepository returns Exercise entity, and ExerciseDTO has a method to convert Exercise to ExerciseDTO
+        return ExerciseDTO.createFromExercise(exerciseRepository.findById(exerciseId).orElse(null));
+    }
+
+    @Override
     public void deleteExercise(Long id) {
         exerciseRepository.deleteById(id);
     }

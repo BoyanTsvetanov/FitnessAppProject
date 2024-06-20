@@ -25,9 +25,6 @@ public class UserController {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
 
     @GetMapping("/login")
