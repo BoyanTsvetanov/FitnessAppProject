@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>View Plan</title>
+</head>
+<body>
+<h1>View Plan</h1>
+<p>Plan ID: <span th:text="${plan.id}"></span></p>
+<p>Plan Name: <span th:text="${plan.name}"></span></p>
+<p>Plan Credits: <span th:text="${plan.credits}"></span></p>
+<h2>Workouts</h2>
+<ul>
+  <li th:each="workout : ${plan.workouts}">
+    <span th:text="${workout.name}"></span>
+  </li>
+</ul>
+<a href="/plans/all">Back to Plans</a>
+</body>
+</html>

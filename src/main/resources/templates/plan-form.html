@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:if="${editMode} ? 'Edit Plan' : 'Create New Plan'"></title>
+</head>
+<body>
+<h1 th:if="${editMode}">Edit Plan</h1>
+<h1 th:unless="${editMode}">Create New Plan</h1>
+
+<form th:action="${editMode} ? @{/plans/{id}/update(id=${planDTO.id})} : @{/plans/create}" method="post" th:object="${planDTO}">
+    <input type="hidden" th:if="${editMode}" th:field="*{id}">
+
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" required><br>
+
+    <label>Credits:</label>
+    <input type="number" th:field="*{credits}" required><br>
+
+    <fieldset>
+        <legend>Workouts:</legend>
+        <div th:each="workout : ${workouts}">
+            <label>
+                <input type="checkbox" th:field="*{workoutIds}" th:value="${workout.id}" />
+                <span th:text="${workout.name}"></span>
+            </label><br>
+        </div>
+    </fieldset>
+
+    <button type="submit" th:text="${editMode} ? 'Update' : 'Create'">Submit</button>
+</form>
+
+<a href="/plans/all">Cancel</a>
+</body>
+</html>

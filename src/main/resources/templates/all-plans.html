@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>All Plans</title>
+</head>
+<body>
+<h1>All Plans</h1>
+<ul>
+  <li th:each="plan : ${plans}">
+    <span th:text="${plan.name + ' - ' + plan.credits}"></span>
+    <a th:href="@{/plans/{id}/edit(id=${plan.id})}">Edit</a>
+  </li>
+</ul>
+<a href="/plans/create">Create</a>
+</body>
+</html>

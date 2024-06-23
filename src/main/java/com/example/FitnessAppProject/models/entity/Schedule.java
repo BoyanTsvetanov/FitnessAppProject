@@ -3,7 +3,9 @@ package com.example.FitnessAppProject.models.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "schedules")
@@ -15,9 +17,13 @@ public class Schedule extends BaseEntity{
     @Column(name = "date", nullable = false)
     private LocalDateTime date;
 
-    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany
+    @JoinTable(
+            name = "schedule_plans",
+            joinColumns = @JoinColumn(name = "schedule_id"),
+            inverseJoinColumns = @JoinColumn(name = "plan_id")
+    )
     private List<Plan> plans;
-
 
     public User getUser() {
         return user;

@@ -1,7 +1,6 @@
 package com.example.FitnessAppProject.models.entity;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -18,11 +17,6 @@ public class Plan extends BaseEntity{
             inverseJoinColumns = @JoinColumn(name = "workout_id")
     )
     private List<Workout> workouts;
-
-    @ManyToOne
-    @JoinColumn(name = "schedule_id")
-    private Schedule schedule;
-
 
     public String getName() {
         return name;
@@ -48,11 +42,5 @@ public class Plan extends BaseEntity{
         this.workouts = workouts;
     }
 
-    public Schedule getSchedule() {
-        return schedule;
-    }
 
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
-    }
 }
