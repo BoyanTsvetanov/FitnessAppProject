@@ -14,8 +14,8 @@ public class Schedule extends BaseEntity{
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @Column(name = "date", nullable = false)
-    private LocalDateTime date;
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TrainingDate> trainingDates;
 
     @ManyToMany
     @JoinTable(
@@ -33,12 +33,12 @@ public class Schedule extends BaseEntity{
         this.user = user;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public List<TrainingDate> getTrainingDates() {
+        return trainingDates;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setTrainingDates(List<TrainingDate> trainingDates) {
+        this.trainingDates = trainingDates;
     }
 
     public List<Plan> getPlans() {
