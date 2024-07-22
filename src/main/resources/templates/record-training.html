@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Record Training</title>
+</head>
+<body>
+<h1>Record Training</h1>
+<form th:action="@{/training/record}" method="post">
+    <div>
+        <label>User ID:</label>
+        <input type="number" name="userId" required />
+    </div>
+    <div>
+        <label>Plan ID:</label>
+        <input type="number" name="planId" required />
+    </div>
+    <div>
+        <label>Training Date:</label>
+        <input type="date" name="trainingDate" required />
+    </div>
+    <button type="submit">Record</button>
+</form>
+<a href="/schedules">Back to Schedules</a>
+</body>
+</html>

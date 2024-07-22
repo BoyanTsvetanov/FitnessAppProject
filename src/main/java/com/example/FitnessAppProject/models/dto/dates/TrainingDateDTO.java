@@ -1,12 +1,15 @@
 package com.example.FitnessAppProject.models.dto.dates;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class TrainingDateDTO {
-    private Long id;
-    private LocalDateTime trainingDate;
 
-    // Getters and Setters
+    private Long id;
+    private Long userId;
+    private Long planId;
+    private LocalDate trainingDate;
+
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -15,11 +18,27 @@ public class TrainingDateDTO {
         this.id = id;
     }
 
-    public LocalDateTime getTrainingDate() {
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getPlanId() {
+        return planId;
+    }
+
+    public void setPlanId(Long planId) {
+        this.planId = planId;
+    }
+
+    public LocalDate getTrainingDate() {
         return trainingDate;
     }
 
-    public void setTrainingDate(LocalDateTime trainingDate) {
+    public void setTrainingDate(LocalDate trainingDate) {
         this.trainingDate = trainingDate;
     }
 }

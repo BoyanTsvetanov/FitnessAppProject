@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Training History</title>
+</head>
+<body>
+<h1>Training History</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Training Date</th>
+    <th>Plan ID</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="trainingDate : ${trainingDates}">
+    <td th:text="${trainingDate.trainingDate}"></td>
+    <td th:text="${trainingDate.planId}"></td>
+  </tr>
+  </tbody>
+</table>
+<a href="/schedules">Back to Schedules</a>
+</body>
+</html>

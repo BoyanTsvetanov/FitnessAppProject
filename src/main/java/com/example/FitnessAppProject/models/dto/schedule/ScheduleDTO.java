@@ -7,12 +7,12 @@ import java.util.List;
 
 
 public class ScheduleDTO {
+
     private Long id;
     private Long userId;
-    private List<TrainingDateDTO> trainingDates;
     private List<PlanDTO> plans;
 
-    // Getters and Setters
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -27,14 +27,6 @@ public class ScheduleDTO {
 
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public List<TrainingDateDTO> getTrainingDates() {
-        return trainingDates;
-    }
-
-    public void setTrainingDates(List<TrainingDateDTO> trainingDates) {
-        this.trainingDates = trainingDates;
     }
 
     public List<PlanDTO> getPlans() {

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit Schedule</title>
+</head>
+<body>
+<h1>Edit Schedule</h1>
+<form th:action="@{/schedules/update/{id}(id=${schedule.id})}" th:object="${schedule}" method="post">
+  <div>
+    <label>User ID:</label>
+    <input type="text" th:field="*{userId}" readonly />
+  </div>
+  <div>
+    <label>Training Dates:</label>
+    <ul>
+      <li th:each="date, iterStat : ${schedule.trainingDates}">
+        <input type="text" th:field="*{trainingDates[iterStat.index].trainingDate}" />
+      </li>
+    </ul>
+  </div>
+  <div>
+    <label>Plans:</label>
+    <ul>
+      <li th:each="plan, iterStat : ${schedule.plans}">
+        <input type="text" th:field="*{plans[iterStat.index].id}" />
+      </li>
+    </ul>
+  </div>
+  <div>
+    <button type="submit">Update</button>
+  </div>
+</form>
+<a href="/schedules">Back to List</a>
+</body>
+</html>

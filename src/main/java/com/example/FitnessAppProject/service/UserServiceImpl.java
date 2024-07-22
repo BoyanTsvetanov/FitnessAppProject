@@ -2,9 +2,11 @@ package com.example.FitnessAppProject.service;
 
 import com.example.FitnessAppProject.models.dto.user.UserRegisterBindingDto;
 import com.example.FitnessAppProject.models.entity.RoleEntity;
+import com.example.FitnessAppProject.models.entity.Schedule;
 import com.example.FitnessAppProject.models.entity.User;
 import com.example.FitnessAppProject.models.enums.UserRoleEnum;
 import com.example.FitnessAppProject.repo.RoleRepository;
+import com.example.FitnessAppProject.repo.ScheduleRepository;
 import com.example.FitnessAppProject.repo.UserRepository;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.Authentication;
@@ -18,11 +20,13 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
+    private final ScheduleRepository scheduleRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, ScheduleRepository scheduleRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.scheduleRepository = scheduleRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -58,6 +62,11 @@ public class UserServiceImpl implements UserService{
         user.getRoles().add(role);
 
         user = userRepository.save(user);
+
+        Schedule schedule = new Schedule();
+        schedule.setUser(user);
+        scheduleRepository.save(schedule);
+
 
         return true;
     }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Schedule Detail</title>
+</head>
+<body>
+<h1>Schedule Detail</h1>
+<div>
+  <label>User ID:</label>
+  <span th:text="${schedule.userId}"></span>
+</div>
+<div>
+  <label>Plans:</label>
+  <ul>
+    <li th:each="plan : ${schedule.plans}">
+      <span th:text="${plan.id}">Plan</span>
+      <form th:action="@{/schedules/{scheduleId}/plans/{planId}/remove(scheduleId=${schedule.id}, planId=${plan.id})}" method="post">
+        <button type="submit">Remove</button>
+      </form>
+    </li>
+  </ul>
+</div>
+
+<a th:href="@{/schedules/edit/{id}(id=${schedule.id})}">Edit</a>
+</body>
+</html>

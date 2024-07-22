@@ -3,6 +3,8 @@ package com.example.FitnessAppProject.service;
 import com.example.FitnessAppProject.models.dto.schedule.ScheduleDTO;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public interface ScheduleService {
     @Transactional
     ScheduleDTO getScheduleById(Long id);
@@ -16,8 +18,10 @@ public interface ScheduleService {
     void deleteSchedule(Long id);
 
     @Transactional
-    ScheduleDTO addPlanToSchedule(Long scheduleId, Long planId);
+    void addPlanToSchedule(Long scheduleId, Long planId);
 
     @Transactional
-    ScheduleDTO removePlanFromSchedule(Long scheduleId, Long planId);
+    void removePlanFromSchedule(Long scheduleId, Long planId);
+
+    List<ScheduleDTO> findAll();
 }
